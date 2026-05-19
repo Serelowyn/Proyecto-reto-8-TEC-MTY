@@ -3,6 +3,8 @@
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
+from matplotlib import pyplot as plt
+
 
 # ------------- Finalizacion de las Importacion de librerias
 
@@ -78,4 +80,24 @@ print(tiendas_gdf.crs)
 
 # 7.	Crea un buffer de 120 km alrededor de los puntos de localización de cada sucursal. 
 
-tiendas_gdf["geometry"] = tiendas_gdf.geometry.buffer(120_000)  # 120,000 metros
+tiendas_gdf["geometry"] = tiendas_gdf.geometry.buffer(120_000)
+
+# 8.	Grafica la intersección de las regiones con los círculos creados a partir de la localización de las sucursales. 
+
+"""df de regiones"""
+regiones_gdf = estados[estados["region"].notna()].dissolve(by="region").reset_index()
+
+fig, ax = plt.subplots(figsize=(14, 10))
+ax.set_title("cobertura: entregas Costco por region en 120km)")
+regiones_gdf.plot(ax=ax,
+                  cmap="YlOrRd",
+                  alpha=0.6,
+                  edgecolor="black",
+                  legend=True)
+tiendas_gdf.plot(ax=ax,
+                 facecolor="none",
+                 edgecolor="black",
+                 linewidth=1)
+
+plt.show()
+
