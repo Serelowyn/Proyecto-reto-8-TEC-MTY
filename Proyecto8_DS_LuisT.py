@@ -21,3 +21,44 @@ tiendas_gdf = gpd.GeoDataFrame(tiendas, geometry=gpd.points_from_xy(tiendas.long
 
 # 5.	Agrega una columna a los estados que indique la región a la que pertenecen y separa el GeoDataFrame por regiones en lugar de por estados:
 
+regiones = {
+    "Tlaxcala": "Centro",
+    "Puebla": "Centro",
+    "Ciudad de México": "Centro",
+    "Morelos": "Centro",
+    "México": "Centro",
+    "Hidalgo": "Centro",
+    "Jalisco": "Centro Oeste",
+    "Michoacán de Ocampo": "Centro Oeste",
+    "Colima": "Centro Oeste",
+    "Aguascalientes": "Centro Oeste",
+    "Nayarit": "Centro Oeste",
+    "Zacatecas": "Centro Oeste",
+    "San Luis Potosí": "Centro Oeste",
+    "Guanajuato": "Centro Oeste",
+    "Querétaro": "Centro Oeste",
+    "Chihuahua": "Noreste",
+    "Coahuila de Zaragoza": "Noreste",
+    "Nuevo León": "Noreste",
+    "Tamaulipas": "Noreste",
+    "Durango": "Noreste",
+    "Baja California": "Noroeste",
+    "Baja California Sur": "Noroeste",
+    "Sonora": "Noroeste",
+    "Sinaloa": "Noroeste",
+    "Guerrero": "Sureste",
+    "Veracruz de Ignacio de la Llave": "Sureste",
+    "Oaxaca": "Sureste",
+    "Tabasco": "Sureste",
+    "Chiapas": "Sureste",
+    "Campeche": "Sureste",
+    "Yucatán": "Sureste",
+    "Quintana Roo": "Sureste"
+}
+
+"""para extraer los nombres exactos"""
+print(estados["name"].unique())
+
+"""incorporamos la nueva columna"""
+estados["region"] = estados["name"].map(regiones)
+
