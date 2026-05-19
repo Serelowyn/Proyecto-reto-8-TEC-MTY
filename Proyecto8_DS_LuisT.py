@@ -62,3 +62,16 @@ print(estados["name"].unique())
 """incorporamos la nueva columna"""
 estados["region"] = estados["name"].map(regiones)
 
+# 6.	Asegura que ambos GeoDataFrames utilicen el CRS epsg=3395 que usa metros como medida de distancia
+
+"""aseguramos que el crs sea el esperado"""
+print(estados.crs)
+print(tiendas_gdf.crs)
+
+"""como no lo anterior es falso, debemos cambiar al que piden CRS epsg=3395"""
+estados = estados.to_crs("EPSG:3395")
+tiendas_gdf = tiendas_gdf.to_crs("EPSG:3395")
+
+#confirmo
+print(estados.crs)
+print(tiendas_gdf.crs)
