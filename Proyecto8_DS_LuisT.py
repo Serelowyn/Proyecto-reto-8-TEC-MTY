@@ -75,3 +75,7 @@ tiendas_gdf = tiendas_gdf.to_crs("EPSG:3395")
 #confirmo
 print(estados.crs)
 print(tiendas_gdf.crs)
+
+# 7.	Crea un buffer de 120 km alrededor de los puntos de localización de cada sucursal. 
+
+tiendas_gdf["geometry"] = tiendas_gdf.geometry.buffer(120_000)  # 120,000 metros
