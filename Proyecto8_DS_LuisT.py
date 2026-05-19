@@ -101,3 +101,22 @@ tiendas_gdf.plot(ax=ax,
 
 plt.show()
 
+
+# 9.	Identifica las regiones en donde se requiere más cobertura y responde la pregunta: ¿En qué regiones del país (Centro, Centro Oeste, Noreste, Noroeste, Sureste) NO es conveniente abrir una nueva sucursal debido a la falta de cobertura de entregas a domicilio?
+
+union_buffers = tiendas_gdf.geometry.unary_union
+for i, row in regiones_gdf.iterrows():
+    region = row["region"]
+    geometria_region = row["geometry"]
+    interseccion = geometria_region.intersection(union_buffers)
+    porcentaje = (interseccion.area / geometria_region.area) * 100
+    print(region, porcentaje)
+    
+"""resultados"""
+# Centro 81.26916893615125
+# Centro Oeste 53.30432018130313
+# Noreste 16.372330087428317
+# Noroeste 22.995551622572098
+# Sureste 22.936762369857096
+
+# en este caso no conviene abrir mas en aquellas zonas donde hay mayor cobertura, en este caso en centro y en centro-oeste. sin embargo, podemos decir que hay 3 zonas de vital importancia que son noreste, noroeste y sureste que estan vacias comparadas con las anteriores. Eso se debe principalmente a que el terreno de esos estados es inmenso entonces abarcar 120 000 km en michoacan es mucho mas completo que en chihuahua por ejemplo. en el sur hay zonas que simplemente no estan muy desarrolladas entonces el envio a domicilio no se ve como algo mas del diario como en zonas mas desarrolladas entonces quizas no haga falta tener en una planificacion a mediano plazo al menos que haya un plan de desarrollo urbano en la zona de interes, sin embargo esos proyectos suelen ser a muy largo plazo, con la llegada de las nuevas generaciones de familias o con el crecimiento de la poblacion y no podemos analizar estas variables por lo que simplemente quedaria la opcion mas segura, de simplemente no tener planes en la zona geografica
