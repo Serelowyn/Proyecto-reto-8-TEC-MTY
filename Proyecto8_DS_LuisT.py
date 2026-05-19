@@ -14,3 +14,8 @@ tiendas = pd.read_csv("tiendaCostco.csv")
 
 """con esto se hace la correccino de cualquier desigualdad en los textos de las columnas del df"""
 tiendas.columns = (tiendas.columns.str.strip().str.lower().str.replace(" ", "_"))
+
+# 4.	Convierte los datos de la localización de las sucursales de Costco® en un GeoDataFrame, creando puntos a partir de la longitud y latitud de cada sucursal. 
+
+tiendas_gdf = gpd.GeoDataFrame(tiendas, geometry=gpd.points_from_xy(tiendas.longitud, tiendas.latitud)
+)
