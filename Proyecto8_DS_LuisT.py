@@ -2,9 +2,7 @@
 
 import geopandas as gpd
 import pandas as pd
-from shapely.geometry import Point
 from matplotlib import pyplot as plt
-
 
 # ------------- Finalizacion de las Importacion de librerias
 
